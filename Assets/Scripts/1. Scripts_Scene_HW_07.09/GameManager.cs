@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         GameConditions();
+
         Debug.Log($"Update: {_distanceToLoose} - {_distance.Distance}");
 
         if (_isRunning == false)
@@ -42,7 +43,6 @@ public class GameManager : MonoBehaviour
 
         _player.Movement();
         _enemy.Movement();
-
     }
 
 
@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 
         _enemy.TargetsToQue();
         _timer.SetTimer();
+
         Debug.Log("Restart Game");
     }
 
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
 
         _message.text = $"{_winMessage}";
         _message.gameObject.SetActive(true);
+
         Debug.Log($"WinGame: {_distanceToLoose} - {_distance.Distance}");
     }
 

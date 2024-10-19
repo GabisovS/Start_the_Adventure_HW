@@ -19,11 +19,6 @@ public class EnemyControl : MonoBehaviour
         TargetsToQue();
     }
 
-/*    private void Update()
-    {
-        Movement();
-    }*/
-
     public void TargetsToQue()
     {
         _targetPositions = new Queue<Vector3>();
@@ -72,16 +67,4 @@ public class EnemyControl : MonoBehaviour
 
         _currentTarget = _targetPositions.Dequeue();
     }
-
-/*    public void ReloadTargetsQue()
-    {
-        _targetPositions = new Queue<Vector3>();
-
-        foreach (Transform target in _targets)
-        {
-            _targetPositions.Enqueue(target.position);
-        }
-
-        _currentTarget = _targetPositions.Dequeue();
-    }*/
 }

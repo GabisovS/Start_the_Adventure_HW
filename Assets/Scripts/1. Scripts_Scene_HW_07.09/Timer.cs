@@ -11,15 +11,9 @@ public class Timer : MonoBehaviour
 
     public float CurrentTime { get; private set; }
 
-/*    private void Start()
-    {
-        CurrentTime = _startTime;
-    }*/
 
     public void SwitchOn()
     {
-        //CurrentTime = _startTime;
-
         CurrentTime -= Time.deltaTime;
 
         if (CurrentTime <= _zeroTime)
@@ -34,6 +28,4 @@ public class Timer : MonoBehaviour
     {
         CurrentTime = _startTime;
     }
-
-
 }

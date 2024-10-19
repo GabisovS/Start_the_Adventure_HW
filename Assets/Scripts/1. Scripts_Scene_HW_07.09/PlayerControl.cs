@@ -18,11 +18,6 @@ public class PlayerControl : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
     }
 
-/*    void Update()
-    {
-        Movement();
-    }*/
-
     public void Movement()
     {
         Vector3 UserInput = new Vector3(Input.GetAxisRaw(HorizontalInput), 0, Input.GetAxisRaw(VerticalInput));
