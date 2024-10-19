@@ -22,14 +22,16 @@ public class GameManager : MonoBehaviour
     private bool _isRunning = false;
 
 
-    void Start()
+    private void Start()
     {
         StartGame();
+        Debug.Log($"First Start Game: {_distanceToLoose} - {_distance.Distance}");
     }
 
-    void Update()
+    private void Update()
     {
-        RestartGame();
+        GameConditions();
+        Debug.Log($"Update: {_distanceToLoose} - {_distance.Distance}");
 
         if (_isRunning == false)
         {
@@ -41,8 +43,6 @@ public class GameManager : MonoBehaviour
         _player.Movement();
         _enemy.Movement();
 
-        WinGame();
-        LooseGame();
     }
 
 
@@ -51,39 +51,59 @@ public class GameManager : MonoBehaviour
         _isRunning = true;
         _position.StartPosition();
 
+        _timer.SetTimer();
+
         _message.gameObject.SetActive(false);
+
+        Debug.Log($"Start Game: {_distanceToLoose} - {_distance.Distance}");
+    }
+
+    private void GameConditions()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RestartGame();
+            Debug.Log($"Pressed F: {_distanceToLoose} - {_distance.Distance}");
+        }
+
+        else if (_timer.CurrentTime <= _timeToWin)
+        {
+            WinGame();
+            Debug.Log($"GameConditions Win: {_distanceToLoose} - {_distance.Distance}");
+        }
+
+        else if (_distanceToLoose < _distance.Distance)
+        {
+            LooseGame();
+            Debug.Log($"GameConditions Loose: {_distanceToLoose} - {_distance.Distance}");
+        }
     }
 
     private void RestartGame()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartGame();
+        StartGame();
 
-            _enemy.ReloadTargetsQue();
-            _timer.ResetTimer();
-        }
+        _enemy.TargetsToQue();
+        _timer.SetTimer();
+        Debug.Log("Restart Game");
     }
 
     private void WinGame()
     {
-        if (_timer.CurrentTime <= _timeToWin)
-        {
-            _isRunning = false;
+        _isRunning = false;
 
-            _message.text = $"{_winMessage}";
-            _message.gameObject.SetActive(true);
-        }
+        _message.text = $"{_winMessage}";
+        _message.gameObject.SetActive(true);
+        Debug.Log($"WinGame: {_distanceToLoose} - {_distance.Distance}");
     }
 
     private void LooseGame()
     {
-        if (_distanceToLoose < _distance.Distance)
-        {
-            _isRunning = false;
+        _isRunning = false;
 
-            _message.text = $"{_looseMessage}";
-            _message.gameObject.SetActive(true);
-        }
+        _message.text = $"{_looseMessage}";
+        _message.gameObject.SetActive(true);
+
+        Debug.Log($"LooseGame: {_distanceToLoose} - {_distance.Distance}");
     }
 }

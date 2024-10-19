@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     private CharacterController _characterController;
 
 
-    void Awake()
+    private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
     }

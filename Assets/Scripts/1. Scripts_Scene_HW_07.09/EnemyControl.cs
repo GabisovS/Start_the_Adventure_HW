@@ -14,7 +14,7 @@ public class EnemyControl : MonoBehaviour
 
     private Vector3 _currentTarget;
 
-    void Awake()
+    private void Awake()
     {
         TargetsToQue();
     }
@@ -24,7 +24,7 @@ public class EnemyControl : MonoBehaviour
         Movement();
     }*/
 
-    private void TargetsToQue()
+    public void TargetsToQue()
     {
         _targetPositions = new Queue<Vector3>();
 
@@ -73,7 +73,7 @@ public class EnemyControl : MonoBehaviour
         _currentTarget = _targetPositions.Dequeue();
     }
 
-    public void ReloadTargetsQue()
+/*    public void ReloadTargetsQue()
     {
         _targetPositions = new Queue<Vector3>();
 
@@ -83,5 +83,5 @@ public class EnemyControl : MonoBehaviour
         }
 
         _currentTarget = _targetPositions.Dequeue();
-    }
+    }*/
 }

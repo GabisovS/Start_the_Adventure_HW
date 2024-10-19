@@ -11,13 +11,15 @@ public class Timer : MonoBehaviour
 
     public float CurrentTime { get; private set; }
 
-    private void Start()
+/*    private void Start()
     {
         CurrentTime = _startTime;
-    }
+    }*/
 
     public void SwitchOn()
     {
+        //CurrentTime = _startTime;
+
         CurrentTime -= Time.deltaTime;
 
         if (CurrentTime <= _zeroTime)
@@ -28,7 +30,7 @@ public class Timer : MonoBehaviour
         _timerText.text = CurrentTime.ToString("00.00");
     }
 
-    public void ResetTimer()
+    public void SetTimer()
     {
         CurrentTime = _startTime;
     }
