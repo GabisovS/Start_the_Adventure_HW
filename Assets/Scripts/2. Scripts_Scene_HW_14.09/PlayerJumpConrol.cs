@@ -44,11 +44,10 @@ public class PlayerJumpConrol : MonoBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
             _isOnGround = true;
             _isOnAir = false;
-
         Debug.Log("Collision");
     }
 }
