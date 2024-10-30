@@ -1,41 +1,31 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private Transform _itemPosition;
+    private Inventory _inventory;
 
-    private List<Item> _itemList;
-
-    public bool IsTakenItem
-    {
-        get;
-        private set;
+    public void Initialize(Inventory inventory)
+    { 
+        _inventory  = inventory;
     }
 
-
-    public void CollectItem(Item item)
+    private void OnTriggerEnter(Collider other)
     {
-        Item itemClone = Instantiate(item, _itemPosition.position, item.transform.rotation, null);
-        Destroy(item.gameObject);
+        Item item = other.GetComponent<Item>();
 
-        _itemList.Add(itemClone);
+        if (item == null)
+        {
+            return;
+        }
 
-        IsTakenItem = true;
-
+        if (CanPickupItem(item))
+        {
+            _inventory.PutItem(item);
+        }
     }
 
-    public void UseItem()
+    private bool CanPickupItem(Item item)
     {
-        _itemList[0].ApllyItemEffect(_player);
-
-        //Destroy(_itemList[0].gameObject); Объект ItemBullet не отыгрывает свой эффект
-
-        _itemList.Remove(_itemList[0]);
-
-        IsTakenItem = false;
+        return _inventory.HasItem() == false && item.CanPickupFor(gameObject);
     }
-
 }

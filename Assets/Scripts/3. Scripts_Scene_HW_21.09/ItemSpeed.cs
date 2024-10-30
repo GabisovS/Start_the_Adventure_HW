@@ -4,14 +4,18 @@ public class ItemSpeed : Item
 {
     [SerializeField] private int _speedUp;
 
-    public override void ApllyItemEffect(Player player)
+    public override bool CanPickupFor(GameObject owner)
     {
+        return owner != null;
+    }
 
+    public override void ApllyItemEffect(GameObject owner)
+    {
+        base.ApllyItemEffect(owner);
+
+        Player player = owner.GetComponent<Player>();
         player.SpeedSetUp(_speedUp);
 
-        Destroy(gameObject, 0.5f);
-
-        Debug.Log($"Item health is collect {player.Speed}");
-
+        Debug.Log($"Item health is collect");
     }
 }

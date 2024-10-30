@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class ItemBullet : Item
 {
-    [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private int _force;
+    [SerializeField] private Bullet _bulletPrefab;
 
-
-    public override void ApllyItemEffect(Player player)
+    public override bool CanPickupFor(GameObject owner)
     {
-        _rigidbody.AddForce(Vector3.forward * _force, ForceMode.Impulse);
-        Destroy(gameObject, 3f);
+        //return owner.GetComponentInChildren<ShootPoint>() != null;
+        return owner != null;
+    }
+    public override void ApllyItemEffect(GameObject owner)
+    {
+        base.ApllyItemEffect(owner); //вызываем партикл эфф из родительского класса
+
+        Transform shootPoint = owner.GetComponentInChildren<ShootPoint>().transform;
+
+        Bullet bullet = Instantiate(_bulletPrefab, shootPoint.position, Quaternion.identity, null);
+
+        bullet.Launch(shootPoint.forward);
+
         Debug.Log("Item bullet is apllied");
-  
     }
 }
+

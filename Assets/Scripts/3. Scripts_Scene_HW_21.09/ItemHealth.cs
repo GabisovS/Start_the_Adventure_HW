@@ -4,14 +4,19 @@ public class ItemHealth : Item
 {
     [SerializeField] private int _healthUp;
 
-    public override void ApllyItemEffect(Player player)
+    public override bool CanPickupFor(GameObject owner)
     {
+        //return owner.GetComponentInChildren<Player>() != null;
+        return owner != null;
+    }
+    public override void ApllyItemEffect(GameObject owner)
+    {
+        base.ApllyItemEffect(owner);
 
+        Player player = owner.GetComponent<Player>();
         player.HealthSetUp( _healthUp);
 
-        Destroy(gameObject, 0.5f);
-
-        Debug.Log($"Item health is collect {player.Health}");
-    
+        Debug.Log($"Item health is collect");
     }
 }
+

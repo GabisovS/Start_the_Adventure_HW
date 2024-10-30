@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement_2109 : MonoBehaviour
@@ -44,5 +43,4 @@ public class PlayerMovement_2109 : MonoBehaviour
     {
         _rigidbody.AddTorque(Vector3.up * _rotationSpeed * _leftRightInput);
     }
-
 }
