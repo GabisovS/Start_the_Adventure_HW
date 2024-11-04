@@ -1,29 +1,36 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : Enemy
+public class StatePatrol_x : IBehaviour_x
 {
-    //[SerializeField] private List<Transform> _targetsInList;
-
+    private const int _speed = 25;
+    private const int _rotationSpeed = 250;
     private const float _minDistanceToTarget = 0.5f;
-
-    private List<Transform> _targetsToPatrol;
 
     private Queue<Vector3> _targetPositions;
 
     private Vector3 _currentTarget;
 
+    private Enemy_x _enemy;
 
-/*    public void Init(List<Transform> targetsToPatrol)
+    public StatePatrol_x(Enemy_x enemy, Queue<Vector3> targetPositions)
     {
-        _targetsToPatrol = new List<Transform>(targetsToPatrol);
-    }*/
+        _enemy = enemy.GetComponent<Enemy_x>();
+        _targetPositions = targetPositions;
+        _currentTarget = _targetPositions.Dequeue();
+    }
 
-    public void TargetsToQue(List<Transform> targetsToPatrol)
+    public void UpdateBehavior()
     {
-       // _targetsToPatrol = new List<Transform>(targetsToPatrol);
+        
+        Movement();
+        Debug.Log("patrol the place");
+    }
+
+/*    public void TargetsToQue(List<Transform> targetsToPatrol)
+    {
+        // _targetsToPatrol = new List<Transform>(targetsToPatrol);
         _targetsToPatrol = targetsToPatrol;
         _targetPositions = new Queue<Vector3>();
 
@@ -33,17 +40,15 @@ public class EnemyPatrol : Enemy
         }
 
         _currentTarget = _targetPositions.Dequeue();
-        
-    }
 
-    private void Update()
-    {
-        Movement();
-    }
+    }*/
+
 
     private void Movement()
     {
-        Vector3 direction = _currentTarget - transform.position;
+        _currentTarget = _targetPositions.Dequeue();
+
+        Vector3 direction = _currentTarget - _enemy.transform.position;
 
         if (direction.magnitude <= _minDistanceToTarget)
         {
@@ -54,6 +59,8 @@ public class EnemyPatrol : Enemy
 
         MoveToTarget(normalizeDirection);
         RotateToTarget(normalizeDirection);
+
+        Debug.Log(_currentTarget);
     }
 
     private void SwiTchTargets()
@@ -64,15 +71,15 @@ public class EnemyPatrol : Enemy
 
     private void MoveToTarget(Vector3 direction)
     {
-        transform.Translate(direction * Speed * Time.deltaTime, Space.World);
+        _enemy.transform.Translate(direction * _speed * Time.deltaTime, Space.World);
     }
 
     private void RotateToTarget(Vector3 direction)
     {
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 
-        float step = RotationSpeed * Time.deltaTime;
+        float step = _rotationSpeed * Time.deltaTime;
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, step);
+        _enemy.transform.rotation = Quaternion.RotateTowards(_enemy.transform.rotation, lookRotation, step);
     }
 }

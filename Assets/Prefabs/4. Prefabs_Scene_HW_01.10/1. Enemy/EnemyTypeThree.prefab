@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3847529026814379789}
   - component: {fileID: 2879758663599970649}
   - component: {fileID: 3033688913305229151}
-  - component: {fileID: 7476073880381897512}
+  - component: {fileID: -272005191384720173}
   m_Layer: 0
-  m_Name: EnemyStatic
+  m_Name: EnemyTypeThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,13 +100,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 7, y: 1, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7476073880381897512
+--- !u!114 &-272005191384720173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9045811204432119300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19581705b726e044ab91743df95fc8d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 674cc644294eca34dbc749206ebc0770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
